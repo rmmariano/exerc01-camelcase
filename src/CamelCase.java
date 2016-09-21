@@ -3,6 +3,21 @@ import java.util.List;
 
 public class CamelCase {
 	
+	private static boolean isFinalArray(int i, char[] arrayChars){		
+		return ( (i+1) >= arrayChars.length );		
+	}
+	
+	private static boolean isUpperCase(String word){		
+		char[] letters = word.toCharArray();
+		
+		for(int i=0; i<letters.length; i++){
+			if( Character.isLowerCase( letters[i] ) )
+				return false;		
+		}
+		
+		return true;		
+	}
+	
 	public static List<String> converterCamelCase(String original){
 		List<String> listaPalavras = new ArrayList<String>();		
 		
@@ -13,7 +28,10 @@ public class CamelCase {
 		for(int i=0; i<letras.length; i++){			
 			char letra = letras[i];
 			
-			if( Character.isUpperCase(letra) && !palavra.isEmpty()){
+			Character proximaLetra = ( (i+1) < letras.length) ? letras[i+1] : Character.MIN_VALUE;
+
+			if( Character.isUpperCase(letra) && !palavra.isEmpty() 
+					&& !isFinalArray(i, letras) && !Character.isUpperCase(proximaLetra) ){
 				listaPalavras.add(palavra.toLowerCase());		
 				palavra = "";
 			}
@@ -21,7 +39,10 @@ public class CamelCase {
 			palavra = palavra + letra;						
 		}	
 		
-		listaPalavras.add(palavra.toLowerCase());
+		if(isUpperCase(palavra))
+			listaPalavras.add(palavra);
+		else		
+			listaPalavras.add(palavra.toLowerCase());
 		
 		return listaPalavras;		
 	}
