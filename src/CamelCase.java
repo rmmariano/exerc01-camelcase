@@ -18,13 +18,9 @@ public class CamelCase {
 		return true;		
 	}
 	
-	public static List<String> converterCamelCase(String original){
-		List<String> listaPalavras = new ArrayList<String>();		
-		
-		char[] letras = original.toCharArray();
-				
+	private static String travelLetters(List<String> listaPalavras, char[] letras) {
 		String palavra = "";
-
+		
 		for(int i=0; i<letras.length; i++){			
 			char letra = letras[i];
 			
@@ -37,7 +33,16 @@ public class CamelCase {
 			}
 
 			palavra = palavra + letra;						
-		}	
+		}
+		return palavra;
+	}
+	
+	public static List<String> converterCamelCase(String original){
+		List<String> listaPalavras = new ArrayList<String>();		
+		
+		char[] letras = original.toCharArray();
+				
+		String palavra = travelLetters(listaPalavras, letras);	
 		
 		if(isUpperCase(palavra))
 			listaPalavras.add(palavra);
@@ -46,5 +51,7 @@ public class CamelCase {
 		
 		return listaPalavras;		
 	}
+
+	
 
 }
