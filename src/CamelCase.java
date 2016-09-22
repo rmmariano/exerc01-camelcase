@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CamelCase {
 	
@@ -96,8 +98,7 @@ public class CamelCase {
 		}
 	}
 
-	private static List<String> verifyIfExistsWordUpperCase(List<String> listWords){
-		
+	private static List<String> verifyIfExistsWordUpperCase(List<String> listWords){		
 		String[] arrayPalavras = Arrays.copyOf(listWords.toArray(), listWords.size(), String[].class);
 		
 		for(int i=0; i<arrayPalavras.length; i++){
@@ -110,10 +111,23 @@ public class CamelCase {
 		return listWords;		
 	}
 	
-	public static List<String> converterCamelCase(String original){
+	private static boolean isThereSpecialCharacter(String original) {
+		Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(original);
+
+		return m.find();
+	}
+	
+	public static List<String> converterCamelCase(String original) throws Exception{
 		List<String> listaPalavras = new ArrayList<String>();		
 		
-		char[] letras = original.toCharArray();		
+		char[] letras = original.toCharArray();	
+		
+		if( isThereSpecialCharacter(original) )
+			throw new CamelCaseComCaracterEspecialException("Inválido -> caracteres especiais não são permitidos, somente letras e números");			
+		
+		if( Character.isDigit(letras[0]) )
+			throw new CamelCaseComecaComNumeroException("Inválido -> não deve começar com números");
 		
 		if( Character.isUpperCase(letras[0]) && !Character.isUpperCase(letras[1]) )
 			letras[0] = Character.toLowerCase(letras[0]);
