@@ -39,8 +39,8 @@ public class CamelCase {
 		return palavra;		
 	}
 	
-	private static String verifyLetterCurrentAndNext(List<String> listaPalavras, String palavra, 
-														char letra, Character proximaLetra) {
+	private static String verifyLetterUpperOrLowerCase(List<String> listaPalavras, String palavra, 
+														char letra, Character proximaLetra){
 		
 		if( Character.isUpperCase(letra) && Character.isUpperCase(proximaLetra) ){			
 			palavra = palavra + letra;					
@@ -50,12 +50,31 @@ public class CamelCase {
 			
 		} else if( !Character.isUpperCase(letra) && !Character.isUpperCase(proximaLetra) ){
 			palavra = palavra + letra;	
-
+	
 		} else if( Character.isUpperCase(letra) && !Character.isUpperCase(proximaLetra) ){			
 			palavra = currentLetterInUpperCaseAndNextLetterInLowerCase(listaPalavras, palavra, letra);
-						
+			
 		}
 		
+		return palavra;
+	}
+	
+	private static String verifyLetterCurrentAndNext(List<String> listaPalavras, String palavra, 
+														char letra, Character proximaLetra) {
+		
+		if( ( !Character.isDigit(letra) && Character.isDigit(proximaLetra) ) || ( Character.isDigit(letra) && !Character.isDigit(proximaLetra) ) ){			
+			palavra = palavra + letra;	
+			listaPalavras.add(palavra);	
+			palavra = "";
+					
+		} else if( Character.isDigit(letra) && Character.isDigit(proximaLetra) ){			
+			palavra = palavra + letra;	
+			
+		} else {			
+			palavra = verifyLetterUpperOrLowerCase(listaPalavras, palavra, letra, proximaLetra);
+
+		}
+
 		return palavra;
 	}
 	

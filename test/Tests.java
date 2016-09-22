@@ -84,5 +84,21 @@ public class Tests {
 		
 		assertEquals(listaEsperada, listaPalavras);
 	}
+	
+	
+	@Test
+	public void palavraCompostaComMeioNumero() {		
+		List<String> listaPalavras = CamelCase.converterCamelCase("recupera10Primeiros");
+		
+		assertEquals(3, listaPalavras.size());	
+		
+		List<String> listaEsperada = new ArrayList<String>();
+		listaEsperada.add("recupera");
+		listaEsperada.add("10");
+		listaEsperada.add("primeiros");
+		
+		assertEquals(listaEsperada, listaPalavras);
+	}
+
 
 }
