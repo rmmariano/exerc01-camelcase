@@ -71,18 +71,18 @@ public class Tests {
 		assertEquals(listaEsperada, listaPalavras);
 	}
 	
-//	@Test
-//	public void palavraCompostaDoMeioTodaMaiuscula() {		
-//		List<String> listaPalavras = CamelCase.converterCamelCase("numeroCPFContribuinte");
-//		
-//		assertEquals(3, listaPalavras.size());	
-//		
-//		List<String> listaEsperada = new ArrayList<String>();
-//		listaEsperada.add("numero");
-//		listaEsperada.add("CPF");
-//		listaEsperada.add("contribuinte");
-//		
-//		assertEquals(listaEsperada, listaPalavras);
-//	}
+	@Test
+	public void palavraCompostaDoMeioTodaMaiuscula() {		
+		List<String> listaPalavras = CamelCase.converterCamelCase("numeroCPFContribuinte");
+		
+		assertEquals(3, listaPalavras.size());	
+		
+		List<String> listaEsperada = new ArrayList<String>();
+		listaEsperada.add("numero");
+		listaEsperada.add("CPF");
+		listaEsperada.add("contribuinte");
+		
+		assertEquals(listaEsperada, listaPalavras);
+	}
 
 }
